@@ -23,3 +23,14 @@
 # use random number for amount of restaurants at location
 # 3. if restaurant&.valid? && location&.valid?
 # 4.    RestaurantLocation.create(restaurant: restaurant, location: location, Faker::Address.street_address)
+
+restaurant = Restaurant.create(name: "KFT",
+                               cuisine: "Fried Turkey")
+
+location = Location.create(city: "Winnipeg",
+                           province: "Manitoba",
+                           country: "Canada")
+
+if restaurant&.valid? && location&.valid?
+    RestaurantLocation.create(restaurant: restaurant, location: location, address: "123 beet street")
+end

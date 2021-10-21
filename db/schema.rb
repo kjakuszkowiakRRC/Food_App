@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_225454) do
+ActiveRecord::Schema.define(version: 2021_10_21_040205) do
 
   create_table "locations", force: :cascade do |t|
     t.string "city"
@@ -21,13 +21,13 @@ ActiveRecord::Schema.define(version: 2021_10_20_225454) do
   end
 
   create_table "restaurant_locations", force: :cascade do |t|
-    t.integer "restaurants_id", null: false
-    t.integer "locations_id", null: false
+    t.integer "restaurant_id", null: false
+    t.integer "location_id", null: false
     t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["locations_id"], name: "index_restaurant_locations_on_locations_id"
-    t.index ["restaurants_id"], name: "index_restaurant_locations_on_restaurants_id"
+    t.index ["location_id"], name: "index_restaurant_locations_on_location_id"
+    t.index ["restaurant_id"], name: "index_restaurant_locations_on_restaurant_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -37,6 +37,6 @@ ActiveRecord::Schema.define(version: 2021_10_20_225454) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "restaurant_locations", "locations", column: "locations_id"
-  add_foreign_key "restaurant_locations", "restaurants", column: "restaurants_id"
+  add_foreign_key "restaurant_locations", "locations"
+  add_foreign_key "restaurant_locations", "restaurants"
 end
