@@ -11,6 +11,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <section>
+      <ul>
+        <li><%= link_to 'Restaurants' , root_path %></li>
+        <li><%= link_to 'Dishes', dishes_path(@dishes)  %></li>
+        <li><%= link_to 'Cities', locations_path(@locations)  %></li>
+      </ul>
+      <%= yield %>
+
+    </section>
   </body>
 </html>

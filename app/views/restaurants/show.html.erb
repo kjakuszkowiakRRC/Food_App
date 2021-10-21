@@ -3,7 +3,7 @@
 <p>Cuisine: <%= @restaurant.cuisine %></p>
 
   <p>
-    <strong>Location:</strong>
+    <strong><%=link_to "Location:", @restaurant.locations.take %></strong>
     <%= @restaurant.restaurant_locations.take.address  %>,
     <%= @restaurant.locations.take.city  %>,
     <%= @restaurant.locations.take.province  %>,

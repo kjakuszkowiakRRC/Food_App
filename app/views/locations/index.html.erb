@@ -1,0 +1,13 @@
+<h1>Cities</h1>
+
+<ul>
+  <% @locations.each do |location| %>
+    <li>
+        <%= link_to "Location", location %> -
+        <%= location.restaurant_locations.take.address %>,
+        <%= location.city  %>,
+        <%= location.province  %>,
+        <%= location.country  %>
+    </li>
+  <% end %>
+</ul>
