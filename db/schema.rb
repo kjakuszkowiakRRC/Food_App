@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_21_040205) do
+ActiveRecord::Schema.define(version: 2021_10_21_041411) do
+
+  create_table "dishes", force: :cascade do |t|
+    t.string "name"
+    t.decimal "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "city"
