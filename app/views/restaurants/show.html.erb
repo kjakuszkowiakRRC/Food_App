@@ -10,11 +10,10 @@
     <%= @restaurant.locations.take.country  %>
   </p>
 
-<h2>Dishes</h2>
+<h2>Dishes:</h2>
 
-<% @restaurant.locations.each do |dish| %>
+<% @restaurant.dishes.each do |dish| %>
   <p>
-    <strong>Dish:</strong>
-    <%= dish.city %>
+    <%= link_to dish.name, dish %> - $<%= dish.price %>
   </p>
 <% end %>

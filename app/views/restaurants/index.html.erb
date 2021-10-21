@@ -3,8 +3,11 @@
 <ul>
   <% @restaurants.each do |restaurant| %>
     <li>
-      <%= link_to restaurant.name, restaurant %>
-      - <%= restaurant.locations %>
+        <%= link_to restaurant.name, restaurant %> -
+        <%= restaurant.restaurant_locations.take.address %>,
+        <%= restaurant.locations.take.city  %>,
+        <%= restaurant.locations.take.province  %>,
+        <%= restaurant.locations.take.country  %>
     </li>
   <% end %>
 </ul>

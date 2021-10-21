@@ -24,11 +24,11 @@
 # 3. if restaurant&.valid? && location&.valid?
 # 4.    RestaurantLocation.create(restaurant: restaurant, location: location, Faker::Address.street_address)
 
-RestaurantLocation.delete_all
-RestaurantDish.delete_all
-Location.delete_all
-Dish.delete_all
-Restaurant.delete_all
+# RestaurantLocation.delete_all
+# RestaurantDish.delete_all
+# Location.delete_all
+# Dish.delete_all
+# Restaurant.delete_all
 
 # restaurant = Restaurant.create(name: "Burger Queen",
 #                                cuisine: "Borger")
@@ -59,21 +59,26 @@ Restaurant.delete_all
 #         )
 #     end
 # end
-restaurant = Restaurant.create(name: "Burger Queen",
-                               cuisine: "Borger")
+for i in 1..10 do
+restaurant = Restaurant.create(name: Faker::Restaurant.name,
+                               cuisine: Faker::Restaurant.type)
 
-location = Location.create(city: "Winnipeg",
-                           province: "Manitoba",
-                           country: "Canada")
+location = Location.create(city: Faker::Address.city,
+                           province: Faker::Address.state,
+                           country: Faker::Address.country)
 
 if restaurant&.valid? && location&.valid?
-    RestaurantLocation.create(restaurant: restaurant, location: location, address: "123 beet street")
+    RestaurantLocation.create(
+                                restaurant: restaurant,
+                                location: location,
+                                address: Faker::Address.street_address)
 end
 
-    for i in 1..rand(8) do
+    for i in 0..rand(8) do
         dish = Dish.create(name: Faker::Food.dish,
                            price: Faker::Number.decimal(l_digits:2),
                            description: Faker::Food.description)
 
         RestaurantDish.create(restaurant: restaurant, dish: dish)
     end
+end
