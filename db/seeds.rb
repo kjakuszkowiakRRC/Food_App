@@ -27,10 +27,17 @@
 restaurant = Restaurant.create(name: "KFT",
                                cuisine: "Fried Turkey")
 
-location = Location.create(city: "Winnipeg",
-                           province: "Manitoba",
-                           country: "Canada")
+# location = Location.create(city: "Winnipeg",
+#                            province: "Manitoba",
+#                            country: "Canada")
 
-if restaurant&.valid? && location&.valid?
-    RestaurantLocation.create(restaurant: restaurant, location: location, address: "123 beet street")
+# if restaurant&.valid? && location&.valid?
+#     RestaurantLocation.create(restaurant: restaurant, location: location, address: "123 beet street")
+# end
+
+dish = Dish.create(name: "Big Fried Turducken",
+                           price: 12.56)
+
+if restaurant&.valid? && dish&.valid?
+    RestaurantDish.create(restaurant: restaurant, dish: dish)
 end
