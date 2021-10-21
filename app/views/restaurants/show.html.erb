@@ -1,3 +1,20 @@
 <h1><%= @restaurant.name %></h1>
 
-<p><%= @restaurant.cuisine %></p>
+<p>Cuisine: <%= @restaurant.cuisine %></p>
+
+  <p>
+    <strong>Location:</strong>
+    <%= @restaurant.restaurant_locations.take.address  %>,
+    <%= @restaurant.locations.take.city  %>,
+    <%= @restaurant.locations.take.province  %>,
+    <%= @restaurant.locations.take.country  %>
+  </p>
+
+<h2>Dishes</h2>
+
+<% @restaurant.locations.each do |dish| %>
+  <p>
+    <strong>Dish:</strong>
+    <%= dish.city %>
+  </p>
+<% end %>
