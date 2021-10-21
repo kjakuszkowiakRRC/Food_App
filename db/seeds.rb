@@ -24,8 +24,14 @@
 # 3. if restaurant&.valid? && location&.valid?
 # 4.    RestaurantLocation.create(restaurant: restaurant, location: location, Faker::Address.street_address)
 
-restaurant = Restaurant.create(name: "KFT",
-                               cuisine: "Fried Turkey")
+RestaurantLocation.delete_all
+RestaurantDish.delete_all
+Location.delete_all
+Dish.delete_all
+Restaurant.delete_all
+
+# restaurant = Restaurant.create(name: "Burger Queen",
+#                                cuisine: "Borger")
 
 # location = Location.create(city: "Winnipeg",
 #                            province: "Manitoba",
@@ -35,9 +41,39 @@ restaurant = Restaurant.create(name: "KFT",
 #     RestaurantLocation.create(restaurant: restaurant, location: location, address: "123 beet street")
 # end
 
-dish = Dish.create(name: "Big Fried Turducken",
-                           price: 12.56)
+# dish = Dish.create(name: "Big Fried Turducken",
+#                            price: 12.56)
 
-if restaurant&.valid? && dish&.valid?
-    RestaurantDish.create(restaurant: restaurant, dish: dish)
+# if restaurant&.valid? && dish&.valid?
+#     RestaurantDish.create(restaurant: restaurant, dish: dish)
+# end
+
+# TableA.all.each do |a_record|
+#     (1..7) do
+#         table_a = a_record
+#         table_b = TableB.order("RANDOM()").first
+
+#         TableATableB.create(
+#             table_a: table_a,
+#             table_b: table_b
+#         )
+#     end
+# end
+restaurant = Restaurant.create(name: "Burger Queen",
+                               cuisine: "Borger")
+
+location = Location.create(city: "Winnipeg",
+                           province: "Manitoba",
+                           country: "Canada")
+
+if restaurant&.valid? && location&.valid?
+    RestaurantLocation.create(restaurant: restaurant, location: location, address: "123 beet street")
 end
+
+    for i in 1..rand(8) do
+        dish = Dish.create(name: Faker::Food.dish,
+                           price: Faker::Number.decimal(l_digits:2),
+                           description: Faker::Food.description)
+
+        RestaurantDish.create(restaurant: restaurant, dish: dish)
+    end
