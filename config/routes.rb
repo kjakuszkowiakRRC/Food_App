@@ -7,5 +7,10 @@ Rails.application.routes.draw do
   # resources :restaurants do
   #   resources :dishes
   # end
-  resources :restaurants, :dishes, :locations
+
+  resources :restaurants, :dishes, :locations, only: %i[index show] do
+    collection do
+      get "search"
+    end
+  end
 end

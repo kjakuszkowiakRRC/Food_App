@@ -6,4 +6,9 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
   end
+
+  def search
+    wildcard_search = "%#{params[:keywords]}%"
+    @restaurants = Restaurant.where("name LIKE ?", wildcard_search)
+  end
 end

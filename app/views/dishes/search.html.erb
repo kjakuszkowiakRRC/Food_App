@@ -1,5 +1,3 @@
-<h1>Dishes</h1>
-
 <%= form_with(url: search_dishes_path, method: :get, local: true) do %>
 <div>
     <%= text_field_tag(:keywords, nil, class: "input", placeholder: 'Search For Dishes') %>
@@ -9,12 +7,12 @@
 </div>
 <% end %>
 
-<ul>
-  <% @dishes.each do |dish| %>
-    <li>
-      <%= link_to dish.name, dish %> -
-      <%= link_to dish.restaurants.take.name, dish.restaurants.take %>
-    </li>
-  <% end %>
-</ul>
+<p>
+    Found <%= pluralize(@dishes.count, 'Dishes') %> when searching for: <%= params[:keywords] %>
+</p>
 
+<ul>
+    <% @dishes.each do |dish| %>
+      <li><%= link_to dish.name, dish %></li>
+    <% end %>
+</ul>
