@@ -24,11 +24,11 @@
 # 3. if restaurant&.valid? && location&.valid?
 # 4.    RestaurantLocation.create(restaurant: restaurant, location: location, Faker::Address.street_address)
 
-# RestaurantLocation.delete_all
-# RestaurantDish.delete_all
-# Location.delete_all
-# Dish.delete_all
-# Restaurant.delete_all
+RestaurantLocation.delete_all
+RestaurantDish.delete_all
+Location.delete_all
+Dish.delete_all
+Restaurant.delete_all
 
 # restaurant = Restaurant.create(name: "Burger Queen",
 #                                cuisine: "Borger")
@@ -59,26 +59,77 @@
 #         )
 #     end
 # end
-for i in 1..10 do
-restaurant = Restaurant.create(name: Faker::Restaurant.name,
-                               cuisine: Faker::Restaurant.type)
 
-location = Location.create(city: Faker::Address.city,
-                           province: Faker::Address.state,
-                           country: Faker::Address.country)
+require "csv"
 
-if restaurant&.valid? && location&.valid?
-    RestaurantLocation.create(
-                                restaurant: restaurant,
-                                location: location,
-                                address: Faker::Address.street_address)
+csv_file_locations = Rails.root.join('db/Location.csv')
+csv_data = File.read(csv_file_locations)
+locations = CSV.parse(csv_data, headers: true)
+
+locations.each do |location|
+
+  # Create categories and products here.
+  Location.create(city: location[0],
+                           province: location[1],
+                           country: location[2])
+
 end
+
+
+csv_file_restaurants = Rails.root.join('db/Restaurant.csv')
+csv_data = File.read(csv_file_restaurants)
+restaurants = CSV.parse(csv_data, headers: true)
+
+restaurants.each do |restaurant|
+
+    # Create categories and products here.
+    restaurant_record = Restaurant.create(name: restaurant[0],
+                               cuisine: restaurant[1])
 
     for i in 0..rand(8) do
         dish = Dish.create(name: Faker::Food.dish,
-                           price: Faker::Number.decimal(l_digits:2),
-                           description: Faker::Food.description)
+                        price: Faker::Number.decimal(l_digits:2),
+                        description: Faker::Food.description)
 
-        RestaurantDish.create(restaurant: restaurant, dish: dish)
+        RestaurantDish.create(restaurant: restaurant_record, dish: dish)
+    end
+
+end
+
+random_num = 5 + rand(8)
+Location.all.each do |location|
+    for i in 0..random_num do
+        restaurant_record = Restaurant.order("RANDOM()").first()
+
+        if restaurant_record&.valid? && location&.valid?
+            RestaurantLocation.create(
+                                    restaurant: restaurant_record,
+                                    location: location,
+                                    address: Faker::Address.street_address)
+        end
     end
 end
+
+# for i in 1..10 do
+# restaurant = Restaurant.create(name: Faker::Restaurant.name,
+#                                cuisine: Faker::Restaurant.type)
+
+# location = Location.create(city: Faker::Address.city,
+#                            province: Faker::Address.state,
+#                            country: Faker::Address.country)
+
+# if restaurant&.valid? && location&.valid?
+#     RestaurantLocation.create(
+#                                 restaurant: restaurant,
+#                                 location: location,
+#                                 address: Faker::Address.street_address)
+# end
+
+#     for i in 0..rand(8) do
+#         dish = Dish.create(name: Faker::Food.dish,
+#                            price: Faker::Number.decimal(l_digits:2),
+#                            description: Faker::Food.description)
+
+#         RestaurantDish.create(restaurant: restaurant, dish: dish)
+#     end
+# end
